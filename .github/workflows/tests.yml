@@ -1,0 +1,32 @@
+name: tests
+on:
+  - push
+  - pull_request
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_LOG: trace
+
+jobs:
+  tests:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - name: Install Rust
+        run: |
+          rustup set profile minimal
+          rustup toolchain install stable --component clippy
+      - name: Clippy
+        run: |
+          cargo clippy --all-targets --all-features -- -D warnings
+      - name: Test
+        run: |
+          cargo test --verbose --no-fail-fast --all-features

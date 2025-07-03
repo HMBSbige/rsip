@@ -12,7 +12,7 @@ services:
     image: ghcr.io/hmbsbige/rsip:latest
     container_name: rsip
     restart: unless-stopped
-    network:
+    networks:
       - traefik-net
     labels:
       traefik.enable: true

@@ -29,7 +29,7 @@ COPY --from=builder /usr/local/bin/rsip /usr/local/bin/
 
 EXPOSE 80
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=3s --retries=2 \
-	CMD wget -q --spider 127.0.0.1/health 2>&1 > /dev/null
+HEALTHCHECK --interval=30s --timeout=1s --start-period=3s --retries=2 \
+	CMD sh -c 'port=${RSIP_PORT_NUMBER:-80}; wget -q --spider 127.0.0.1:${port}/health >/dev/null 2>&1'
 
 ENTRYPOINT ["/usr/local/bin/rsip"]

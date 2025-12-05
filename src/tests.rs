@@ -1,4 +1,4 @@
-use actix_web::{http::StatusCode, test, App};
+use actix_web::{App, http::StatusCode, test};
 
 use super::*;
 

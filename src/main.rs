@@ -1,6 +1,8 @@
-use actix_web::http::StatusCode;
+#![warn(clippy::unwrap_used)]
+
 use actix_web::HttpRequest;
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use actix_web::http::StatusCode;
+use actix_web::{App, HttpResponse, HttpServer, Responder, get};
 use std::env;
 use std::net::{IpAddr, Ipv6Addr};
 

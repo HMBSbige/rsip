@@ -616,7 +616,7 @@ checksum = "8d942b98df5e658f56f20d592c7f868833fe38115e65c33003d8cd224b0155da"
 
 [[package]]
 name = "rsip"
-version = "1.0.1"
+version = "1.0.2"
 dependencies = [
  "actix-web",
 ]

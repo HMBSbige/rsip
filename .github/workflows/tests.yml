@@ -33,3 +33,4 @@ jobs:
       - name: Test
         run: |
           cargo test --verbose --no-fail-fast --all-features
+          cargo test --release --verbose --no-fail-fast --all-features

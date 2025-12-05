@@ -26,6 +26,6 @@ async fn test_get_client_ip() {
     assert_eq!(resp.status(), StatusCode::OK);
 
     let body = test::read_body(resp).await;
-    let body = std::str::from_utf8(&body).unwrap();
+    let body = std::str::from_utf8(&body).unwrap_or_default();
     assert_eq!(body, "::2");
 }

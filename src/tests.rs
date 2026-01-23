@@ -18,9 +18,7 @@ async fn test_health() {
 #[actix_web::test]
 async fn test_get_client_ip() {
     let app = test::init_service(App::new().service(get_client_ip)).await;
-    let req = test::TestRequest::default()
-        .insert_header(("X-Forwarded-For", "::2, 1.1.1.1"))
-        .to_request();
+    let req = test::TestRequest::default().insert_header(("X-Forwarded-For", "::2, 1.1.1.1")).to_request();
     let resp = test::call_service(&app, req).await;
 
     assert_eq!(resp.status(), StatusCode::OK);

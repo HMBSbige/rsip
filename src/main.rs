@@ -27,10 +27,7 @@ async fn get_client_ip(req: HttpRequest) -> (String, StatusCode) {
 
     // unreachable!()
     if let Some(addr) = req.peer_addr() {
-        return (
-            addr.ip().to_canonical().to_string(),
-            StatusCode::INTERNAL_SERVER_ERROR,
-        );
+        return (addr.ip().to_canonical().to_string(), StatusCode::INTERNAL_SERVER_ERROR);
     }
 
     (String::default(), StatusCode::INTERNAL_SERVER_ERROR)
@@ -41,10 +38,7 @@ async fn main() -> std::io::Result<()> {
     let port = env::var("RSIP_PORT_NUMBER").unwrap_or_default();
     let port = port.parse::<u16>().unwrap_or(80);
 
-    HttpServer::new(|| App::new().service(health).service(get_client_ip))
-        .bind((Ipv6Addr::UNSPECIFIED, port))?
-        .run()
-        .await
+    HttpServer::new(|| App::new().service(health).service(get_client_ip)).bind((Ipv6Addr::UNSPECIFIED, port))?.run().await
 }
 
 #[cfg(test)]

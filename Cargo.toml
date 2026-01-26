@@ -4,10 +4,13 @@ version = "1.0.2"
 edition = "2024"
 
 [dependencies]
-actix-web = { version = "4", default-features = false, features = ["macros"] }
+actix-web = { version = "4", default-features = false, features = ["macros", "http2"] }
 
 [profile.release]
 lto = true
 strip = true
 codegen-units = 1
 panic = "abort"
+
+[lints.clippy]
+unwrap_used = "warn"

@@ -1,5 +1,3 @@
-#![warn(clippy::unwrap_used)]
-
 use actix_web::HttpRequest;
 use actix_web::http::StatusCode;
 use actix_web::{App, HttpResponse, HttpServer, Responder, get};
@@ -38,7 +36,10 @@ async fn main() -> std::io::Result<()> {
     let port = env::var("RSIP_PORT_NUMBER").unwrap_or_default();
     let port = port.parse::<u16>().unwrap_or(80);
 
-    HttpServer::new(|| App::new().service(health).service(get_client_ip)).bind((Ipv6Addr::UNSPECIFIED, port))?.run().await
+    HttpServer::new(|| App::new().service(health).service(get_client_ip))
+        .bind_auto_h2c((Ipv6Addr::UNSPECIFIED, port))?
+        .run()
+        .await
 }
 
 #[cfg(test)]
